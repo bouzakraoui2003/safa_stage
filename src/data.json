@@ -1,0 +1,459 @@
+{
+  "clients": [
+    {
+      "id": "1",
+      "conducteur": {
+        "1er": {
+          "Nom": "Smith",
+          "Prénom": "John",
+          "Né(e) le": "1990-05-15",
+          "Tel Marocain": "+212 612-345678",
+          "Tel Etranger": "+1 555-123456",
+          "E-mail": "john.smith@example.com",
+          "Adresse locale": "123 Rue Hassan II, Casablanca",
+          "Adresse à l'etranger": "456 Main St, New York, USA",
+          "Permis de conduire N°": "MC12345678",
+          "Délivré le": "2015-08-20",
+          "Carte": "ID12345",
+          "Passport N°": "P78901234",
+          "Valable jusqu'au": "2030-12-31",
+          "Recommandé(e) par": "Jane Doe",
+          "Nationalité": "américain"
+        },
+        "2eme": {
+          "Nom": "Johnson",
+          "Prénom": "Emily",
+          "Tel": "+212 678-901234",
+          "Permis de conduire N°": "MC87654321",
+          "Délivré le": "2018-03-10",
+          "Carburant au départ": "Diesel"
+        },
+        "3eme": {
+          "Nom": "Williams",
+          "Prénom": "Michael",
+          "Permis de conduire N°": "MC56789012",
+          "Délivré le": "2020-11-05"
+        }
+      }
+    },
+    {
+      "id": "2",
+      "conducteur": {
+        "1er": {
+          "Nom": "Brown",
+          "Prénom": "Sarah",
+          "Né(e) le": "1985-09-22",
+          "Tel Marocain": "+212 633-987654",
+          "Tel Etranger": "+44 7700-123456",
+          "E-mail": "sarah.brown@example.com",
+          "Adresse locale": "456 Avenue Mohammed V, Rabat",
+          "Adresse à l'etranger": "789 High St, London, UK",
+          "Permis de conduire N°": "MC98765432",
+          "Délivré le": "2012-06-18",
+          "Carte": "ID67890",
+          "Passport N°": "P12345678",
+          "Valable jusqu'au": "2028-10-15",
+          "Recommandé(e) par": "Alex Green",
+          "Nationalité": "américain"
+        },
+        "2eme": {
+          "Nom": "Davis",
+          "Prénom": "Robert",
+          "Tel": "+212 699-456123",
+          "Permis de conduire N°": "MC34567890",
+          "Délivré le": "2019-04-25",
+          "Carburant au départ": "Essence"
+        },
+        "3eme": {
+          "Nom": "Miller",
+          "Prénom": "Jessica",
+          "Permis de conduire N°": "MC23456789",
+          "Délivré le": "2021-07-30"
+        }
+      }
+    },
+    {
+      "id": "3",
+      "conducteur": {
+        "1er": {
+          "Nom": "Assila",
+          "Prénom": "Safa",
+          "Né(e) le": "2003-10-21",
+          "Tel Marocain": "0651852311",
+          "Tel Etranger": "",
+          "E-mail": "safasafa10f@gmail.com",
+          "Adresse locale": "tamazart ait mellol ",
+          "Adresse à l'etranger": "",
+          "Permis de conduire N°": "4568215674",
+          "Délivré le": "2025-04-16",
+          "Carte": "JH55264",
+          "Passport N°": "6456416514",
+          "Valable jusqu'au": "2030-03-21",
+          "Recommandé(e) par": "",
+          "Nationalité": "marocaine"
+        },
+        "2eme": {
+          "Nom": "Berlin",
+          "Prénom": "Mohamed",
+          "Tel": "0654842211",
+          "Permis de conduire N°": "465498641654",
+          "Délivré le": "2025-04-17",
+          "Carburant au départ": "plein"
+        },
+        "3eme": {
+          "Nom": "Oumaima",
+          "Prénom": "oum",
+          "Permis de conduire N°": "54456461956456",
+          "Délivré le": "2025-04-24"
+        }
+      }
+    },
+    {
+      "id": "4",
+      "conducteur": {
+        "1er": {
+          "Nom": "bouzakraoui",
+          "Prénom": "mohamed",
+          "Né(e) le": "5455-05-04",
+          "Tel Marocain": "454454545",
+          "Tel Etranger": "454545454",
+          "E-mail": "simo10bouzakraoui@gmail.com",
+          "Adresse locale": "sidi bibi center",
+          "Adresse à l'etranger": "centre sidi bibi",
+          "Permis de conduire N°": "454545454",
+          "Délivré le": "4545-04-05",
+          "Carte": "45454545",
+          "Passport N°": "545454545",
+          "Valable jusqu'au": "4545-04-05",
+          "Recommandé(e) par": "454545",
+          "Nationalité": "marocain"
+        },
+        "2eme": {
+          "Nom": "54545",
+          "Prénom": "4545",
+          "Tel": "5454",
+          "Permis de conduire N°": "54545",
+          "Délivré le": "0454-04-05",
+          "Carburant au départ": "545454"
+        },
+        "3eme": {
+          "Nom": "4545454",
+          "Prénom": "54545",
+          "Permis de conduire N°": "454545",
+          "Délivré le": "45454-04-05"
+        }
+      }
+    }
+  ],
+  "voitures": [
+    {
+      "id": "1",
+      "marque": "Toyota",
+      "type": "Corolla",
+      "matricule": "A1234BC",
+      "type carburant": "Essence",
+      "nbr de places": 5,
+      "boite vitesse": "manuelle",
+      "tarifs": {
+        "1jour": 300,
+        "3jours": 800,
+        "7jours": 1500
+      },
+      "date d'expiration d'assurance": "2024-12-31",
+      "date d'expiration de la visite": "2024-06-30",
+      "model": "2021",
+      "etat": "Disponible",
+      "image": "C:\\Users\\Setup Game\\Desktop\\safa_stage_3\\lps-cars\\src\\voiture_images\\Toyota Raize Hybrid.jpg"
+    },
+    {
+      "id": "2",
+      "marque": "Renault",
+      "type": "Clio",
+      "matricule": "B5678DE",
+      "type carburant": "Diesel",
+      "nbr de places": 5,
+      "boite vitesse": "manuelle",
+      "tarifs": {
+        "1jour": 250,
+        "3jours": 700,
+        "7jours": 1300
+      },
+      "date d'expiration d'assurance": "2024-11-30",
+      "date d'expiration de la visite": "2024-05-15",
+      "model": "2019",
+      "etat": "Disponible",
+      "image": "C:\\Users\\Setup Game\\Desktop\\safa_stage_3\\lps-cars\\src\\voiture_images\\Clio_5.jpg"
+    },
+    {
+      "id": "3",
+      "marque": "Toyota",
+      "type": "red",
+      "matricule": "PEU-225",
+      "type carburant": "Diesel",
+      "nbr de places": "7",
+      "boite vitesse": "manuelle",
+      "tarifs": {
+        "1jour": "350",
+        "3jours": "600",
+        "7jours": "2000"
+      },
+      "date d'expiration d'assurance": "2025-04-30",
+      "date d'expiration de la visite": "2025-04-24",
+      "model": "2023",
+      "etat": "Réservée",
+      "image": "C:\\Users\\Setup Game\\Desktop\\safa_stage_3\\lps-cars\\src\\voiture_images\\Toyota Raize Hybrid.jpg"
+    },
+    {
+      "id": "4",
+      "marque": "dacia",
+      "type": "LOGAN",
+      "matricule": "A19381027408234",
+      "type carburant": "Essence",
+      "nbr de places": "5",
+      "boite vitesse": "manuelle",
+      "tarifs": {
+        "1jour": "300",
+        "3jours": "800",
+        "7jours": "1300"
+      },
+      "date d'expiration d'assurance": "2025-03-12",
+      "date d'expiration de la visite": "2025-03-31",
+      "model": "2024",
+      "etat": "Réservée",
+      "image": "C:\\Users\\Setup Game\\Desktop\\safa_stage_3\\lps-cars\\src\\voiture_images\\Dacia Logan 2008.jpg"
+    },
+    {
+      "id": "5",
+      "marque": "Renault",
+      "type": "Clio",
+      "model": "2020",
+      "matricule": "23-A-26589",
+      "type carburant": "Diesel",
+      "nbr de places": "6",
+      "boite vitesse": "automatic",
+      "tarifs": {
+        "1jour": "350",
+        "3jours": "900",
+        "7jours": "1500"
+      },
+      "date d'expiration d'assurance": "2025-04-24",
+      "date d'expiration de la visite": "2025-04-26",
+      "etat": "Indisponible",
+      "image": "C:\\Users\\Setup Game\\Desktop\\safa_stage_3\\lps-cars\\src\\voiture_images\\Clio_5.jpg"
+    }
+  ],
+  "reservations": [
+    {
+      "voitureId": "4",
+      "clientId": "1",
+      "dateDebut": "2025-04-16",
+      "dateFin": "2025-04-29",
+      "lieuReservation": "agadir",
+      "lieuLivraison": "agadir",
+      "telClient": "+212 612-345678",
+      "emailClient": "john.smith@example.com",
+      "marque": "dacia",
+      "accessoires": {
+        "siegeBebe": false,
+        "carte": false,
+        "gps": true,
+        "gallerie": false
+      },
+      "id": "1"
+    },
+    {
+      "voitureId": "2",
+      "clientId": "2",
+      "dateDebut": "2005-02-22",
+      "dateFin": "2254-05-05",
+      "lieuReservation": "dd",
+      "lieuLivraison": "dd",
+      "telClient": "+212 633-987654",
+      "emailClient": "sarah.brown@example.com",
+      "marque": "Renault",
+      "accessoires": {
+        "siegeBebe": true,
+        "carte": false,
+        "gps": true,
+        "gallerie": false
+      },
+      "id": "2"
+    },
+    {
+      "voitureId": "5",
+      "clientId": "3",
+      "dateDebut": "2025-04-17",
+      "dateFin": "2025-04-26",
+      "lieuReservation": "ait mellol",
+      "lieuLivraison": "ait mellol",
+      "telClient": "0651852311",
+      "emailClient": "safasafa10f@gmail.com",
+      "marque": "Renault",
+      "accessoires": {
+        "siegeBebe": true,
+        "carte": true,
+        "gps": true,
+        "gallerie": true
+      },
+      "id": "3"
+    },
+    {
+      "id": "4",
+      "voitureId": "1",
+      "clientId": "3",
+      "dateDebut": "2025-04-24",
+      "dateFin": "2025-04-26",
+      "lieuReservation": "ait mellol",
+      "lieuLivraison": "ait mellol",
+      "telClient": "0651852311",
+      "emailClient": "safasafa10f@gmail.com",
+      "marque": "Toyota",
+      "accessoires": {
+        "siegeBebe": true,
+        "carte": false,
+        "gps": true,
+        "gallerie": false
+      }
+    },
+    {
+      "id": "5",
+      "voitureId": "4",
+      "clientId": "2",
+      "dateDebut": "2025-04-23",
+      "dateFin": "2025-04-25",
+      "lieuReservation": "sidi bibi",
+      "lieuLivraison": "sidi bibi",
+      "telClient": "+212 633-987654",
+      "emailClient": "sarah.brown@example.com",
+      "marque": "dacia",
+      "accessoires": {
+        "siegeBebe": true,
+        "carte": false,
+        "gps": true,
+        "gallerie": false
+      }
+    },
+    {
+      "id": "6",
+      "voitureId": "3",
+      "clientId": "4",
+      "dateDebut": "2025-04-23",
+      "dateFin": "2025-04-26",
+      "lieuReservation": "azrou",
+      "lieuLivraison": "azrou",
+      "telClient": "454454545",
+      "emailClient": "simo10bouzakraoui@gmail.com",
+      "marque": "Toyota",
+      "accessoires": {
+        "siegeBebe": false,
+        "carte": true,
+        "gps": true,
+        "gallerie": false
+      }
+    }
+  ],
+  "contrats": [
+    {
+      "id": "1",
+      "reservationId": "1",
+      "numeroContrat": "CR202500001",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "2",
+      "reservationId": "2",
+      "numeroContrat": "CR202500002",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "3",
+      "reservationId": "3",
+      "numeroContrat": "CR202500003",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "4",
+      "reservationId": "4",
+      "numeroContrat": "CR202500004",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "5",
+      "reservationId": "5",
+      "numeroContrat": "CR202500005",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "5",
+      "reservationId": "5",
+      "numeroContrat": "CR202500005",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "5",
+      "reservationId": "5",
+      "numeroContrat": "CR202500005",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "5",
+      "reservationId": "5",
+      "numeroContrat": "CR202500005",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "6",
+      "reservationId": "6",
+      "numeroContrat": "CR202500006",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "6",
+      "reservationId": "6",
+      "numeroContrat": "CR202500006",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "6",
+      "reservationId": "6",
+      "numeroContrat": "CR202500006",
+      "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "6",
+      "reservationId": "6",
+      "numeroContrat": "CR202500006",
+      "dateCreation": "2025-04-23"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "1745871689193",
+      "nom": "bouzakraoui",
+      "prenom": "mohamed",
+      "age": 22,
+      "gender": "homme",
+      "email": "simo10bouzakraoui@gmail.com",
+      "password": "456456"
+    },
+    {
+      "id": "1745930569760",
+      "nom": "Assila",
+      "prenom": "Safa",
+      "age": 21,
+      "gender": "femme",
+      "email": "safasafa12f@gmail.com",
+      "password": "safa123"
+    },
+    {
+      "id": "1745940193885",
+      "nom": "berlin",
+      "prenom": "mohi",
+      "age": 22,
+      "dateOfBirth": "2003-04-21",
+      "gender": "homme",
+      "email": "berlin@gmail.com",
+      "password": "147258"
+    }
+  ]
+}
