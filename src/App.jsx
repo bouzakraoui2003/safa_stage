@@ -1,6 +1,6 @@
 "use client"
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import ClientsTable from "./components/ClientsTable"
 import VoituresTable from "./components/VoituresTable"
@@ -102,20 +102,39 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar
-        onLogout={handleLogout}
-        userRole={userRole}
-        pendingAccountsCount={pendingAccounts.length}
-        onPendingAccountsUpdate={fetchPendingAccounts}
-      />
       <Routes>
-        <Route path="/clients" element={<ClientsTable />} />
-        <Route path="/voitures" element={<VoituresTable />} />
-        <Route path="/reservations" element={<Reservation />} />
-        <Route path="/contrats" element={<Contrat />} />
-        <Route path="/statistics" element={<Statistics />} />
-        <Route path="/user-management" element={<UserManagement onPendingAccountsUpdate={fetchPendingAccounts} />} />
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/*"
+          element={
+            <>
+              <Navbar
+                onLogout={handleLogout}
+                userRole={userRole}
+                pendingAccountsCount={pendingAccounts.length}
+                onPendingAccountsUpdate={fetchPendingAccounts}
+              />
+              <Routes>
+                <Route path="/clients" element={<ClientsTable />} />
+                <Route path="/voitures" element={<VoituresTable />} />
+                <Route path="/reservations" element={<Reservation />} />
+                <Route path="/contrats" element={<Contrat />} />
+                <Route path="/statistics" element={<Statistics />} />
+                <Route
+                  path="/user-management"
+                  element={
+                    userRole === "admin" ? (
+                      <UserManagement onPendingAccountsUpdate={fetchPendingAccounts} />
+                    ) : (
+                      <Navigate to="/" replace />
+                    )
+                  }
+                />
+                <Route path="/" element={<Home />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </>
+          }
+        />
       </Routes>
     </Router>
   )

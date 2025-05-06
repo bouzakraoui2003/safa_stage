@@ -46,6 +46,14 @@ const Navbar = ({ onLogout, userRole, pendingAccountsCount, onPendingAccountsUpd
     }
   }, [])
 
+  // Check if user is on a protected route they shouldn't access
+  useEffect(() => {
+    // If user is not admin and is on the user management page, redirect to home
+    if (userRole !== "admin" && location.pathname === "/user-management") {
+      navigate("/", { replace: true })
+    }
+  }, [userRole, location.pathname, navigate])
+
   const toggleSettings = () => {
     setShowSettings(!showSettings)
     setEditMode(false)

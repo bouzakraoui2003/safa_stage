@@ -104,7 +104,7 @@ const StatisticsDashboard = () => {
     }, {})
 
     const reservationsByLocation = filteredReservations.reduce((acc, res) => {
-      acc[res.lieuReservation] = (acc[res.lieuReservation] || 0) + 1
+      acc[res.lieuLivraison] = (acc[res.lieuLivraison] || 0) + 1
       return acc
     }, {})
 
@@ -745,7 +745,7 @@ const StatisticsDashboard = () => {
                                 <td className="p-2">{new Date(reservation.dateDebut).toLocaleDateString()}</td>
                                 <td className="p-2">{new Date(reservation.dateFin).toLocaleDateString()}</td>
                                 <td className="p-2">{days} jours</td>
-                                <td className="p-2">{reservation.lieuReservation}</td>
+                                <td className="p-2">{reservation.lieuLivraison}</td>
                               </tr>
                             )
                           })}

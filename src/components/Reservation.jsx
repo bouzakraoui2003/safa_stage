@@ -14,7 +14,7 @@ const Reservation = () => {
     clientId: "",
     dateDebut: "",
     dateFin: "",
-    lieuReservation: "",
+    lieuLivraison: "",
     telClient: "",
     emailClient: "",
     marque: "",
@@ -307,7 +307,7 @@ const Reservation = () => {
       clientId: reservation.clientId,
       dateDebut: reservation.dateDebut,
       dateFin: reservation.dateFin,
-      lieuReservation: reservation.lieuReservation,
+      lieuLivraison: reservation.lieuLivraison,
       telClient: reservation.telClient,
       emailClient: reservation.emailClient,
       marque: voitures.find((v) => v.id === reservation.voitureId)?.marque || "",
@@ -479,7 +479,7 @@ const Reservation = () => {
       clientId: "",
       dateDebut: "",
       dateFin: "",
-      lieuReservation: "",
+      lieuLivraison: "",
       telClient: "",
       emailClient: "",
       marque: "",
@@ -834,11 +834,11 @@ const Reservation = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Lieu de réservation:</label>
+                <label>Lieu de livraison:</label>
                 <input
                   type="text"
-                  name="lieuReservation"
-                  value={newReservation.lieuReservation}
+                  name="lieuLivraison"
+                  value={newReservation.lieuLivraison}
                   onChange={handleInputChange}
                   required
                 />
@@ -939,6 +939,7 @@ const Reservation = () => {
                 <th>Nationalité</th>
                 <th>Marque de voiture</th>
                 <th>Matricule</th>
+                <th>Lieu de livraison</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
                 <th>Accessoires</th>
@@ -964,6 +965,7 @@ const Reservation = () => {
                     <td>{clientNationality}</td>
                     <td>{reservation.marque}</td>
                     <td>{voiture?.matricule || "N/A"}</td>
+                    <td>{reservation.lieuLivraison}</td>
                     <td>{reservation.dateDebut}</td>
                     <td>{reservation.dateFin}</td>
                     <td>

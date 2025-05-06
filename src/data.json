@@ -248,18 +248,16 @@
       "clientId": "1",
       "dateDebut": "2025-04-16",
       "dateFin": "2025-04-29",
-      "lieuReservation": "agadir",
-      "lieuLivraison": "agadir",
+      "lieuLivraison": "Casablanca",
       "telClient": "+212 612-345678",
       "emailClient": "john.smith@example.com",
       "marque": "dacia",
       "accessoires": {
-        "siegeBebe": false,
+        "siegeBebe": true,
         "carte": false,
         "gps": true,
         "gallerie": false
-      },
-      "id": "1"
+      }
     },
     {
       "voitureId": "2",
@@ -424,6 +422,30 @@
       "reservationId": "6",
       "numeroContrat": "CR202500006",
       "dateCreation": "2025-04-23"
+    },
+    {
+      "id": "7",
+      "reservationId": "undefined",
+      "numeroContrat": "CR202500007",
+      "dateCreation": "2025-05-06"
+    },
+    {
+      "id": "7",
+      "reservationId": "undefined",
+      "numeroContrat": "CR202500007",
+      "dateCreation": "2025-05-06"
+    },
+    {
+      "id": "7",
+      "reservationId": "undefined",
+      "numeroContrat": "CR202500007",
+      "dateCreation": "2025-05-06"
+    },
+    {
+      "id": "7",
+      "reservationId": "undefined",
+      "numeroContrat": "CR202500007",
+      "dateCreation": "2025-05-06"
     }
   ],
   "accounts": [
@@ -451,7 +473,7 @@
       "status": "approved"
     },
     {
-      "id": "1746549132696",
+      "id": "1746556171183",
       "nom": "Bouzakraoui",
       "prenom": "Mohamed",
       "age": 22,

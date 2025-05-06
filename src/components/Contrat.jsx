@@ -362,38 +362,45 @@ const Contrat = () => {
         doc.setFont("helvetica", "bold")
         doc.text("Informations de la Réservation", 15, yPos)
         yPos += 2
-        const reservationRows = 6;
+        const reservationRows = 7; // 7 lines
         const reservationBoxHeight = reservationRows * 5 + 3;
         doc.setDrawColor(0, 0, 0)
         doc.rect(15, yPos, 180, reservationBoxHeight)
         yPos += 5
         doc.setFontSize(7)
         doc.setFont("helvetica", "normal")
-        // Grid layout: 2 columns with about 5px space between key and value
-        const keyValueGap = 5; // 5px gap
+        const keyValueGap = 5;
+        // Ligne 1
         doc.text("Date de réservation:", 20, yPos)
         doc.text(`${formatDate(contract.reservation.dateReservation) || formatDate(new Date())}`, 60 + keyValueGap, yPos)
         doc.text("Nom:", 100, yPos)
         doc.text(`${contract.client.conducteur["1er"].Nom || ''} ${contract.client.conducteur["1er"].Prénom || ''}`, 120 + keyValueGap, yPos)
         yPos += 5
+        // Ligne 2
         doc.text("Email:", 20, yPos)
         doc.text(`${contract.reservation.emailClient || ''}`, 60 + keyValueGap, yPos)
         doc.text("Numéro de tel:", 100, yPos)
         doc.text(`${contract.reservation.telClient || ''}`, 120 + keyValueGap, yPos)
         yPos += 5
+        // Ligne 3
         doc.text("Nationalité:", 20, yPos)
         doc.text(`${contract.client.conducteur["1er"]["Adresse à l'etranger"] ? contract.client.conducteur["1er"]["Adresse à l'etranger"].split(', ').pop() : 'Marocain'}`, 60 + keyValueGap, yPos)
         doc.text("Marque de voiture:", 100, yPos)
         doc.text(`${contract.reservation.marque || contract.voiture.marque || ''}`, 120 + keyValueGap, yPos)
         yPos += 5
+        // Ligne 4
         doc.text("Matricule:", 20, yPos)
         doc.text(`${contract.voiture.matricule || ''}`, 60 + keyValueGap, yPos)
         doc.text("Date de début:", 100, yPos)
         doc.text(`${formatDate(contract.reservation.dateDebut)}`, 120 + keyValueGap, yPos)
         yPos += 5
-        doc.text("Date de fin:", 20, yPos)
-        doc.text(`${formatDate(contract.reservation.dateFin)}`, 60 + keyValueGap, yPos)
-        // Accessoires (tag style)
+        // Ligne 5
+        doc.text("Lieu de livraison:", 20, yPos)
+        doc.text(`${contract.reservation.lieuLivraison || ''}`, 60 + keyValueGap, yPos)
+        doc.text("Date de fin:", 100, yPos)
+        doc.text(`${formatDate(contract.reservation.dateFin)}`, 120 + keyValueGap, yPos)
+        yPos += 5
+        // Ligne 6 (Accessoires, only left side)
         let accessoiresStr = '';
         if (contract.reservation.accessoires) {
           if (contract.reservation.accessoires.siegeBebe) accessoiresStr += '[Siège bébé] ';
@@ -401,8 +408,8 @@ const Contrat = () => {
           if (contract.reservation.accessoires.gps) accessoiresStr += '[GPS] ';
           if (contract.reservation.accessoires.gallerie) accessoiresStr += '[Gallerie] ';
         }
-        doc.text("Accessoires:", 100, yPos)
-        doc.text(`${accessoiresStr.trim() || 'Aucun'}`, 120 + keyValueGap, yPos)
+        doc.text("Accessoires:", 20, yPos)
+        doc.text(`${accessoiresStr.trim() || 'Aucun'}`, 60 + keyValueGap, yPos)
         yPos += 5 + 10; // Add extra space after box for visual comfort
 
         // --- VOITURE INFO (with border, dynamic height, grid layout, with boîte de vitesse, only one section) ---
@@ -788,8 +795,8 @@ const Contrat = () => {
                             <span className="detail-value">{formatDate(contract.reservation.dateFin)}</span>
                           </div>
                           <div className="detail-item">
-                            <span className="detail-label">Lieu:</span>
-                            <span className="detail-value">{contract.reservation.lieuReservation || ""}</span>
+                            <span className="detail-label">Lieu de livraison:</span>
+                            <span className="detail-value">{contract.reservation.lieuLivraison || ""}</span>
                           </div>
                           <div className="detail-item">
                             <span className="detail-label">Accessoires:</span>
