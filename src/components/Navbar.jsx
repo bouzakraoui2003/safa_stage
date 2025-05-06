@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import "../styles/style.css"
 
-const Navbar = ({ onLogout }) => {
+const Navbar = ({ onLogout, userRole, pendingAccountsCount, onPendingAccountsUpdate }) => {
   const location = useLocation()
+  const navigate = useNavigate()
   const [showSettings, setShowSettings] = useState(false)
   const [userData, setUserData] = useState(null)
   const [editMode, setEditMode] = useState(false)
@@ -153,11 +154,15 @@ const Navbar = ({ onLogout }) => {
     }
   }
 
+  const handleNotificationClick = () => {
+    navigate("/user-management")
+  }
+
   return (
     <nav className="navbar">
       {/* Make the brand a link to home */}
       <Link to="/" className="navbar-brand">
-        <img src="" alt="LPS Logo" className="navbar-logo-img" />
+        <img src="/placeholder.svg" alt="LPS Logo" className="navbar-logo-img" />
         <span className="navbar-company-name">Location Promotion Souss</span>
       </Link>
 
@@ -177,9 +182,46 @@ const Navbar = ({ onLogout }) => {
         <li className={isActive("/statistics")}>
           <Link to="/statistics">Statistiques</Link>
         </li>
+        {userRole === "admin" && (
+          <li className={isActive("/user-management")}>
+            <Link to="/user-management">User Management</Link>
+          </li>
+        )}
       </ul>
 
-      <div className="navbar-actions">
+      <div className="navbar-actions" style={{ display: "flex", alignItems: "center" }}>
+        {/* Notification icon for admins */}
+        {userRole === "admin" && (
+          <div
+            className="notification-icon"
+            onClick={handleNotificationClick}
+            style={{ marginRight: "15px", position: "relative", cursor: "pointer" }}
+          >
+            <i className="fas fa-bell" style={{ fontSize: "20px", color: "#fff" }}></i>
+            {pendingAccountsCount > 0 && (
+              <span
+                className="notification-badge"
+                style={{
+                  position: "absolute",
+                  top: "-8px",
+                  right: "-8px",
+                  background: "#e74c3c",
+                  color: "white",
+                  borderRadius: "50%",
+                  width: "18px",
+                  height: "18px",
+                  fontSize: "12px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {pendingAccountsCount}
+              </span>
+            )}
+          </div>
+        )}
+
         <button className="settings-btn" onClick={toggleSettings}>
           <i className="fas fa-user-cog"></i> Paramètres personnels
         </button>
@@ -211,6 +253,18 @@ const Navbar = ({ onLogout }) => {
                 <div className="info-item">
                   <span className="info-label">Âge:</span>
                   <span className="info-value">{userData.age} ans</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Role:</span>
+                  <span
+                    className="info-value"
+                    style={{
+                      textTransform: "capitalize",
+                      color: userData.role === "admin" ? "#e74c3c" : "#3498db",
+                    }}
+                  >
+                    {userData.role}
+                  </span>
                 </div>
 
                 <div className="settings-actions">

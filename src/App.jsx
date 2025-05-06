@@ -9,11 +9,41 @@ import Contrat from "./components/Contrat"
 import Home from "./components/Home"
 import Login from "./components/Login"
 import Statistics from "./components/Statistics"
-import { useState } from "react"
+import UserManagement from "./components/UserManagement"
+import { useState, useEffect } from "react"
 import "./styles/style.css"
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem("user"))
+  const [userRole, setUserRole] = useState("user")
+  const [pendingAccounts, setPendingAccounts] = useState([])
+
+  // Fetch pending accounts when the app loads
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchPendingAccounts()
+    }
+  }, [isAuthenticated])
+
+  // Set user role from localStorage
+  useEffect(() => {
+    const user = localStorage.getItem("user")
+    if (user) {
+      const userData = JSON.parse(user)
+      setUserRole(userData.role || "user")
+    }
+  }, [isAuthenticated])
+
+  // Fetch pending accounts
+  const fetchPendingAccounts = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/pendingAccounts")
+      const data = await res.json()
+      setPendingAccounts(data)
+    } catch (error) {
+      console.error("Error fetching pending accounts:", error)
+    }
+  }
 
   const handleLogin = async (email, password) => {
     try {
@@ -23,10 +53,16 @@ const App = () => {
       const user = accounts.find((acc) => acc.email === email && acc.password === password)
 
       if (user) {
+        // Check if the account is approved
+        if (user.status === "pending") {
+          throw new Error("Your account is pending approval by an administrator.")
+        }
+
         // Store user in localStorage (excluding password for security)
         const { password, ...userWithoutPassword } = user
         localStorage.setItem("user", JSON.stringify(userWithoutPassword))
         setIsAuthenticated(true)
+        setUserRole(user.role || "user")
       } else {
         throw new Error("Invalid credentials")
       }
@@ -39,31 +75,47 @@ const App = () => {
   const handleLogout = () => {
     localStorage.removeItem("user")
     setIsAuthenticated(false)
+    setUserRole("user")
+  }
+
+  // If user is not authenticated, show login page
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />
+  }
+
+  // If user is authenticated but has role "user", show waiting message
+  if (userRole === "user" && isAuthenticated) {
+    return (
+      <div className="auth-container">
+        <div className="auth-form">
+          <h2 className="auth-title">Account Pending Approval</h2>
+          <div className="auth-success">
+            Your account is waiting for administrator approval. Please check back later.
+          </div>
+          <button className="auth-btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      </div>
+    )
   }
 
   return (
     <Router>
+      <Navbar
+        onLogout={handleLogout}
+        userRole={userRole}
+        pendingAccountsCount={pendingAccounts.length}
+        onPendingAccountsUpdate={fetchPendingAccounts}
+      />
       <Routes>
-        <Route
-          path="/*"
-          element={
-            isAuthenticated ? (
-              <>
-                <Navbar onLogout={handleLogout} />
-                <Routes>
-                  <Route path="/clients" element={<ClientsTable />} />
-                  <Route path="/voitures" element={<VoituresTable />} />
-                  <Route path="/reservations" element={<Reservation />} />
-                  <Route path="/contrats" element={<Contrat />} />
-                  <Route path="/statistics" element={<Statistics />} />
-                  <Route path="/" element={<Home />} />
-                </Routes>
-              </>
-            ) : (
-              <Login onLogin={handleLogin} />
-            )
-          }
-        />
+        <Route path="/clients" element={<ClientsTable />} />
+        <Route path="/voitures" element={<VoituresTable />} />
+        <Route path="/reservations" element={<Reservation />} />
+        <Route path="/contrats" element={<Contrat />} />
+        <Route path="/statistics" element={<Statistics />} />
+        <Route path="/user-management" element={<UserManagement onPendingAccountsUpdate={fetchPendingAccounts} />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   )

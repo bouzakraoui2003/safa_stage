@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react"
 import "../styles/style.css"
-import emailjs from '@emailjs/browser'
-import logoImage from '../images/LPS.png'  // Import the logo image
+import emailjs from "@emailjs/browser"
+import logoImage from "../images/LPS.png" // Import the logo image
 
 // Initialize EmailJS with your public key
 emailjs.init("QNXPAimf9qfKPJdAt")
@@ -70,21 +70,16 @@ const Login = ({ onLogin }) => {
   const sendVerificationEmail = async (email, code) => {
     try {
       const templateParams = {
-        to_name: email.split('@')[0],
+        to_name: email.split("@")[0],
         to_email: email,
         from_name: "LPS - Location Promotion Souss",
         verification_code: code,
-        reply_to: email
+        reply_to: email,
       }
 
       console.log("Sending email with params:", templateParams)
 
-      const response = await emailjs.send(
-        "service_jdubq5f",
-        "template_shyvxta",
-        templateParams,
-        "QNXPAimf9qfKPJdAt"
-      )
+      const response = await emailjs.send("service_jdubq5f", "template_shyvxta", templateParams, "QNXPAimf9qfKPJdAt")
 
       console.log("EmailJS Response:", response)
       return true
@@ -92,7 +87,7 @@ const Login = ({ onLogin }) => {
       console.error("Detailed EmailJS Error:", {
         status: error.status,
         text: error.text,
-        error: error
+        error: error,
       })
 
       // Provide specific error messages based on the error
@@ -121,11 +116,11 @@ const Login = ({ onLogin }) => {
     const birthDate = new Date(dateOfBirth)
     let age = today.getFullYear() - birthDate.getFullYear()
     const monthDiff = today.getMonth() - birthDate.getMonth()
-    
+
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
       age--
     }
-    
+
     return age
   }
 
@@ -210,7 +205,9 @@ const Login = ({ onLogin }) => {
 
     if (blockTime && blockTime > Date.now()) {
       const timeLeft = Math.ceil((blockTime - Date.now()) / 1000)
-      setError(`Vous êtes bloqué en raison de trop nombreuses tentatives. Veuillez réessayer dans ${timeLeft} secondes.`)
+      setError(
+        `Vous êtes bloqué en raison de trop nombreuses tentatives. Veuillez réessayer dans ${timeLeft} secondes.`,
+      )
       return
     }
 
@@ -226,7 +223,9 @@ const Login = ({ onLogin }) => {
 
       if (attempts >= 3) {
         setBlockTime(Date.now() + 90000) // Block for 1 minute and 30 seconds
-        setError("Vous êtes bloqué en raison de trop nombreuses tentatives. Veuillez réessayer dans 1 minute et 30 secondes.")
+        setError(
+          "Vous êtes bloqué en raison de trop nombreuses tentatives. Veuillez réessayer dans 1 minute et 30 secondes.",
+        )
       }
       return
     }
@@ -260,20 +259,24 @@ const Login = ({ onLogin }) => {
     const age = calculateAge(dateOfBirth)
 
     try {
-      // Create new account
-      const createResponse = await fetch("http://localhost:3001/accounts", {
+      // Create new pending account
+      const newAccount = {
+        id: Date.now().toString(),
+        nom,
+        prenom,
+        age,
+        dateOfBirth,
+        gender,
+        email,
+        password,
+        role: "user",
+        status: "pending",
+      }
+
+      const createResponse = await fetch("http://localhost:3001/pendingAccounts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: Date.now(),
-          nom,
-          prenom,
-          age,
-          dateOfBirth,
-          gender,
-          email,
-          password,
-        }),
+        body: JSON.stringify(newAccount),
       })
 
       if (!createResponse.ok) {
@@ -281,7 +284,7 @@ const Login = ({ onLogin }) => {
       }
 
       // Signup successful
-      setSuccess("Compte créé avec succès! Vous pouvez maintenant vous connecter.")
+      setSuccess("Compte créé avec succès! Votre compte est en attente d'approbation par un administrateur.")
 
       // Reset form and switch to login
       setSignupData({
@@ -299,7 +302,7 @@ const Login = ({ onLogin }) => {
 
       setTimeout(() => {
         setActiveForm("login")
-      }, 2000)
+      }, 5000)
     } catch (err) {
       setError("Erreur: " + err.message)
     }
@@ -318,7 +321,25 @@ const Login = ({ onLogin }) => {
     }
 
     try {
-      // Fetch accounts from data.json
+      // First check if the account is in pending status
+      const pendingResponse = await fetch("http://localhost:3001/pendingAccounts")
+      if (!pendingResponse.ok) {
+        throw new Error("Erreur de connexion au serveur")
+      }
+
+      const pendingAccounts = await pendingResponse.json()
+      const pendingUser = pendingAccounts.find((acc) => acc.email === loginData.email)
+
+      if (pendingUser) {
+        if (pendingUser.password === loginData.password) {
+          setError("Votre compte est en attente d'approbation par un administrateur.")
+        } else {
+          setError("Mot de passe incorrect.")
+        }
+        return
+      }
+
+      // Fetch approved accounts from data.json
       const response = await fetch("http://localhost:3001/accounts")
       if (!response.ok) {
         throw new Error("Erreur de connexion au serveur")
@@ -403,7 +424,9 @@ const Login = ({ onLogin }) => {
 
     if (blockTime && blockTime > Date.now()) {
       const timeLeft = Math.ceil((blockTime - Date.now()) / 1000)
-      setError(`Vous êtes bloqué en raison de trop nombreuses tentatives. Veuillez réessayer dans ${timeLeft} secondes.`)
+      setError(
+        `Vous êtes bloqué en raison de trop nombreuses tentatives. Veuillez réessayer dans ${timeLeft} secondes.`,
+      )
       return
     }
 
@@ -419,7 +442,9 @@ const Login = ({ onLogin }) => {
 
       if (attempts >= 3) {
         setBlockTime(Date.now() + 90000) // Block for 1 minute and 30 seconds
-        setError("Vous êtes bloqué en raison de trop nombreuses tentatives. Veuillez réessayer dans 1 minute et 30 secondes.")
+        setError(
+          "Vous êtes bloqué en raison de trop nombreuses tentatives. Veuillez réessayer dans 1 minute et 30 secondes.",
+        )
       }
       return
     }
@@ -463,7 +488,7 @@ const Login = ({ onLogin }) => {
       // Create updated account object
       const updatedAccount = {
         ...accounts[userIndex],
-        password: newPassword
+        password: newPassword,
       }
 
       // Update the specific account
@@ -679,7 +704,7 @@ const Login = ({ onLogin }) => {
           value={signupData.dateOfBirth}
           onChange={handleSignupChange}
           placeholder="Entrez votre date de naissance"
-          max={new Date().toISOString().split('T')[0]} // Prevent future dates
+          max={new Date().toISOString().split("T")[0]} // Prevent future dates
         />
       </div>
 
@@ -874,7 +899,7 @@ const Login = ({ onLogin }) => {
   return (
     <div className="auth-container">
       <div className="auth-logo-container">
-        <img src={logoImage} alt="LPS Logo" className="auth-logo" />
+        <img src={logoImage || "/placeholder.svg"} alt="LPS Logo" className="auth-logo" />
       </div>
       {activeForm === "login" && renderLoginForm()}
       {activeForm === "signup" && renderInitialSignupForm()}

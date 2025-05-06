@@ -428,22 +428,15 @@
   ],
   "accounts": [
     {
-      "id": "1745871689193",
-      "nom": "bouzakraoui",
-      "prenom": "mohamed",
-      "age": 22,
-      "gender": "homme",
-      "email": "simo10bouzakraoui@gmail.com",
-      "password": "456456"
-    },
-    {
       "id": "1745930569760",
       "nom": "Assila",
       "prenom": "Safa",
       "age": 21,
       "gender": "femme",
       "email": "safasafa12f@gmail.com",
-      "password": "safa123"
+      "password": "safa123",
+      "role": "admin",
+      "status": "approved"
     },
     {
       "id": "1745940193885",
@@ -453,7 +446,22 @@
       "dateOfBirth": "2003-04-21",
       "gender": "homme",
       "email": "berlin@gmail.com",
-      "password": "147258"
+      "password": "147258",
+      "role": "employee",
+      "status": "approved"
+    },
+    {
+      "id": "1746549132696",
+      "nom": "Bouzakraoui",
+      "prenom": "Mohamed",
+      "age": 22,
+      "dateOfBirth": "2003-04-21",
+      "gender": "homme",
+      "email": "simo10bouzakraoui@gmail.com",
+      "password": "123123",
+      "role": "employee",
+      "status": "approved"
     }
-  ]
+  ],
+  "pendingAccounts": []
 }
