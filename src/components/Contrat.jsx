@@ -506,13 +506,21 @@ const Contrat = () => {
       // Add first page (white background)
       addContractPage(null, 1, 3)
 
+      // Add verso page (white background, conditions générales)
+      doc.addPage()
+      addConditionsGeneralesPage(doc, null)
+
       // Add second page (pink/purple background) - Updated color
       doc.addPage()
       addContractPage("#eccfed", 2, 3)
+      doc.addPage()
+      addConditionsGeneralesPage(doc, "#eccfed")
 
       // Add third page (yellow/green background)
       doc.addPage()
       addContractPage("#e9eaa4", 3, 3)
+      doc.addPage()
+      addConditionsGeneralesPage(doc, "#e9eaa4")
 
       console.log("PDF generation completed, opening in new tab")
 
@@ -875,3 +883,101 @@ const Contrat = () => {
 }
 
 export default Contrat
+
+function addConditionsGeneralesPage(doc, bgColor = null) {
+  let r, g, b;
+  if (bgColor) {
+    r = Number.parseInt(bgColor.slice(1, 3), 16)
+    g = Number.parseInt(bgColor.slice(3, 5), 16)
+    b = Number.parseInt(bgColor.slice(5, 7), 16)
+    doc.setFillColor(r, g, b)
+    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, "F")
+  }
+  // Try to maximize font size to fill the page
+  const conditions = [
+    "Le présent contrat a été établi et daté comme indiqué au verso. Il engage LOCATION PROMOTION SOUSS qui sera appelée le loueur et la personne, société ou compagnie par qui est signé ce contrat, qui sera dénommée le locataire :",
+    '',
+    "Article Premier - UTILISATION DU VEHICULE :",
+    "Le locataire s'engage à ne pas conduire en état d'ébriété et à ne pas laisser conduire le véhicule par d'autres personnes que lui-même ou celles agréées par le loueur et dont il est le porte garant ; et à utiliser le véhicule que pour ses besoins personnels ; il est interdit de participer à toute compétition quelle qu'elle soit, d'utiliser le véhicule à des fins illicites, ou des transports de marchandises, le locataire s'engage à ne pas solliciter directement des documents douaniers, il est interdit au locataire de surcharger le véhicule loué en transportant un nombre de passagers supérieur à celui porté sur le contrat, sous peine d'être déchu de l'assurance.",
+    '',
+    "Article 2 - ETAT DE LA VOITURE :",
+    "La voiture est livrée en parfait état de marche et de propreté. Les compteurs et leurs prises plombés, et les plombs ne pourront être enlevés ou violés sous peine de déchéance pour le location sur la base de 800 kilomètres par jour. Le véhicule sera rendu dans le même état de propreté, à défaut le locataire devra acquitter les frais de remise en état. Ces cinq manquants sont en bon état, sans coupures, fusées sur normale. En cas de détérioration d'un de l'un pour cause autre que l'usure normale, le locataire s'engage à le remplacer immédiatement par un même dimension et d'usure sensiblement égale, ou d'en payer le montant.",
+    '',
+    "Article 3 - ESSENCE ET HUILE :",
+    "Il appartient à la charge du locataire de vérifier en permanence les niveaux d'huile et d'eau, vérifier les niveaux de la boîte à vitesses et du pont arrière tous les 1000 kilomètres. Il justifiera des travaux par des factures correspondantes (qui lui seront remboursées) sous peine d'avoir à payer une indemnité pour usure anormale.",
+    '',
+    "Article 4 - ENTRETIEN ET REPARATION :",
+    "L'usure mécanique normale est à la charge du loueur. Toutes les réparations provenant, soit d'une usure anormale, soit d'une négligence de la part du locataire ou d'une cause accidentelle seront à sa charge et exécutées par nos soins. Dans le cas où le véhicule serait immobilisé en dehors de la région, les réparations (qu'elles soient dues à l'usure normale ou à une cause accidentelle, ne seront exécutées qu'après accord télégraphique du loueur ou par l'agent régional de la marque du véhicule. Elles devront faire l'objet d'une facture acquittée et très détaillée. Les pièces défectueuses remplacées seront remises avec la facture acquittée. En aucun cas et en aucune circonstance, le locataire ne pourra réclamer des dommages et intérêts, soit pour retard de la remise du véhicule, ou annulation de la location, soit pour immobilisation dans le cas de réparations nécessaires d'usure normale et effectuées au cours de la location. La responsabilité du loueur ne pourra jamais être invoquée, même en cas d'accidents de personnes ou de choses ayant pu résulter de vices ou de défauts de construction ou de réparations de la voiture.",
+    '',
+    "Article 5 - ASSURANCES :",
+    "1- Le locataire est garanti pour les risques suivants :",
+    "    1- Une assurance en illimité contre les tiers.",
+    "    2- Contre le vol de l'incendie et contre tous dommages, à l'exclusion des vêtements et tous objets transportés.",
+    "    3- Sont également garantis les personnes transportées.",
+    "    4- En cas de dégâts à la voiture, avec toutes fois une franchise de 10 000 DH restant à sa charge dans le cas d'accident à moins que le locataire n'ait souscrit avant la location et avec l'accord de loueur une complément de location pour suppression de franchise.",
+    "    5- En cas d'accident, vol ou incendie, le locataire est tenu d'établir l'unique responsabilité des dégâts injustifiés par sa faute et prend en charges la totalité des frais de réparation. Si l'accident n'est pas justifié, le locataire sera tenu intégralement responsable.",
+    "    6- Le locataire s'engage à déclarer au loueur, dans les 48 heures et immédiatement aux autorités, police ou gendarmerie, tout accident, vol ou incendie, même partiel sous peine d'être déchu du bénéfice de l'assurance. Sa déclaration devra obligatoirement mentionner : les circonstances, la date, le lieu et l'heure, le numéro ou nom de l'agent, le nom et l'adresse des adversaires, ainsi que le numéro de la voiture de l'adversaire. S'il y a lieu, il joindra à cette déclaration tout rapport de police, ou gendarmerie ou constat d'huissier, s'il en a été établi, et il ne devra en aucun cas discuter la responsabilité ni traiter ou transiger avec des tiers relativement à l'accident.",
+    "    7- Il paiera une somme de 150 dirhams HT par jour,",
+    "    pour indemnité de changement de la voiture pendant toute la durée de l'immobilisation provenant d'usure anormale ou d'accident.",
+    "    8- La voiture n'est assurée que pour toute la durée du location. Passé ce délai, le loueur décline toute responsabilité pour les accidents ou dommages qui pourraient causer et dont il devra avoir été avisé par tout bordereau de location.",
+    "    9- Enfin, il n'y a pas assurance pour tout conducteur non muni d'un permis en état de validité ou d'un permis datant de moins d'une année.",
+    "    10- Le loueur décline toute responsabilité pour les amendes et autres dus ou dégâts et vols de la voiture pourrait causer pendant la période de location si le locataire a délibérément fourni au loueur des informations fausses concernant son identité ou son adresse ou la validité de son permis de conduire.",
+    '',
+    "Article 6 - LOCATION, CAUTION, PROLONGATION :",
+    "Les prix de location, ainsi que la caution, sont déterminés par les tarifs en vigueur et payables d'avance - pour un temps supérieur à celui indiqué sur le contrat. Il devra après avoir obtenu l'accord du loueur, faire parvenir le montant de la location supplémentaire 48 heures avant l'expiration de la location en cours sous peine de ne pouvoir être assuré et de se voir refuser toute autorisation de bus de confiance.",
+    "La journée de location compte de l'heure du début à toute journée commencée.",
+    '',
+    "Article 7 - RAPATRIEMENT DE LA VOITURE :",
+    "Le locataire s'interdit formellement d'abandonner le véhicule.",
+    "En cas d'impossibilité matérielle, Celui-ci sera rapatrié aux frais du locataire, la location restant due jusqu'au retour au véhicule.",
+    '',
+    "Article 8 - PAPIERS DE LA VOITURE :",
+    "Le locataire dès la fin de la location et à la rentrée de la voiture, doit restituer la carte grise et tous les papiers nécessaires à la circulation, faute de quoi, ces pièces étant indispensables à la revente, le locataire devra acquitter au loueur quotidiennement des frais de duplicata jusqu'à leur remise à la société.",
+    "En cas de perte de papiers, le locataire sera facturé selon le coût des papiers et des frais de duplicata.",
+    '',
+    "Article 9 - RESPONSABILITE :",
+    "Le locataire demeure seul responsable des contraventions et procès-verbaux établis contre lui.",
+    '',
+    "Article 10 - COMPETENCE :",
+    "De convention expresse et en cas de contestation quelconque, le tribunal régional d'Agadir sera seul compétent",
+    "Le client déclare avoir pris connaissance et d'accepté les conditions générales de location.",
+    "(Lu et lettre approuvé avec les termes)."
+  ];
+  let bestFontSize = 5.5;
+  let bestY = 22;
+  let minFontSize = 5.5;
+  let maxFontSize = 10;
+  let pageHeight = 295;
+  let marginTop = 22;
+  let marginBottom = 10;
+  let usableHeight = pageHeight - marginTop - marginBottom;
+  // Binary search for best font size
+  while (maxFontSize - minFontSize > 0.1) {
+    let midFontSize = (minFontSize + maxFontSize) / 2;
+    let y = marginTop;
+    doc.setFontSize(midFontSize)
+    doc.setFont("helvetica", "normal")
+    for (let i = 0; i < conditions.length; i++) {
+      const splitText = doc.splitTextToSize(conditions[i], 175);
+      y += splitText.length * (midFontSize * 0.52);
+    }
+    if (y < marginTop + usableHeight) {
+      bestFontSize = midFontSize;
+      minFontSize = midFontSize;
+    } else {
+      maxFontSize = midFontSize;
+    }
+  }
+  // Render with bestFontSize
+  doc.setFontSize(11)
+  doc.setFont("helvetica", "bold")
+  doc.text("CONDITIONS GENERALES", 105, 15, { align: "center" })
+  doc.setFontSize(bestFontSize)
+  doc.setFont("helvetica", "normal")
+  let y = marginTop;
+  for (let i = 0; i < conditions.length; i++) {
+    const splitText = doc.splitTextToSize(conditions[i], 175);
+    doc.text(splitText, 17, y);
+    y += splitText.length * (bestFontSize * 0.52);
+  }
+}
